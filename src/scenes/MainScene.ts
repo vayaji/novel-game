@@ -1,4 +1,4 @@
-import { Dialogbox, DialogboxConfig } from "../Component/DialogBox";
+import { Dialogbox, DialogboxConfig } from "../components/DialogBox";
 import { timelineData } from "../data/timeline";
 import { Timeline } from "../type/Timeline";
 
@@ -39,6 +39,7 @@ export class MainScene extends Phaser.Scene {
                 dialogBox.forceStop();
             } else {
                 console.info("next");
+                dialogBox.setCharacterImage("haruto-normal");
             }
         });
 

@@ -80,15 +80,17 @@ export class PreloaderScene extends Phaser.Scene {
                 },
                 {
                     key: "home",
-                    url: "src/assets/home.png",
+                    url: "src/assets/background/home.png",
+                },
+                {
+                    key: "haruto-normal",
+                    url: "src/assets/character/haruto/normal.png",
                 },
             ],
         };
 
         for (const resource of resources.image) {
-            setInterval(() => {
-                this.load.image(resource.key, resource.url);
-            }, 10);
+            this.load.image(resource.key, resource.url);
         }
     }
 
