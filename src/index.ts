@@ -1,5 +1,6 @@
 import * as Phaser from "phaser";
 import { Scenes } from "./scenes";
+import RoundRectanglePlugin from "phaser3-rex-plugins/plugins/roundrectangle-plugin.js";
 
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
@@ -13,6 +14,15 @@ const config: Phaser.Types.Core.GameConfig = {
         height: "100%",
     },
     scene: Scenes,
+    plugins: {
+        global: [
+            {
+                key: "rexRoundRectanglePlugin",
+                plugin: RoundRectanglePlugin,
+                start: true,
+            },
+        ],
+    },
 };
 
 new Phaser.Game(config);

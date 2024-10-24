@@ -46,6 +46,8 @@ export class PreloaderScene extends Phaser.Scene {
         });
         assetText.setOrigin(0.5, 0.5);
 
+        this.load.plugin("rexroundrectangleplugin", "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexroundrectangleplugin.min.js", true);
+
         this.load.on("progress", function (value: number) {
             percentText.setText(value * 100 + "%");
             progressBar.clear();

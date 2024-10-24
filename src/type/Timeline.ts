@@ -18,6 +18,11 @@ type ChoiceEvent = {
     choices: Choice[];
 };
 
+type TimelineTransitionEvent = {
+    type: "timelineTransition";
+    timelineID: string;
+};
+
 type SceneTransitionEvent = {
     type: "sceneTransition";
     key: string;
@@ -25,4 +30,4 @@ type SceneTransitionEvent = {
     fadeTime?: number;
 };
 
-export type Timeline = (DialogEvent | SetBackgroundEvent | ChoiceEvent | SceneTransitionEvent)[];
+export type Timeline = (DialogEvent | SetBackgroundEvent | ChoiceEvent | TimelineTransitionEvent | SceneTransitionEvent)[];

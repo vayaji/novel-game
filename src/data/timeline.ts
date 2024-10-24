@@ -16,20 +16,29 @@ export const timelineData: Timelines = {
                 { text: "……分かった、帰るよ。", timelineID: "chapter1_3" },
             ],
         },
+        { type: "timelineTransition", timelineID: "chapter1_1" },
     ],
     chapter1_1: [
         { type: "dialog", speakerName: "母親", text: "昨日の夜、急に具合が悪くなって、病院に運ばれたんだけど…結局、助からなかったの。" },
         { type: "dialog", speakerName: "遥斗", image: "普通の顔", text: "…そうか…。おじいちゃん、ずっと元気だったのに。" },
         { type: "dialog", speakerName: "母親", text: "そうね、突然で驚いてる。でも、もう苦しんでいないから…。" },
         { type: "dialog", speakerName: "遥斗", image: "普通の顔", text: "分かった。すぐに帰るよ。" },
-        { type: "sceneTransition", key: "chapter1_3" },
+        {
+            type: "choice",
+            text: "…",
+            choices: [
+                { text: "aa", timelineID: "chapter1_1" },
+                { text: "ee", timelineID: "chapter1_2" },
+            ],
+        },
+        { type: "timelineTransition", timelineID: "chapter1_3" },
     ],
     chapter1_2: [
         { type: "dialog", speakerName: "母親", text: "どうしてって、急に体調が悪くなって…おじいちゃんの年齢もあって、すぐには治療が間に合わなかったの。" },
         { type: "dialog", speakerName: "遥斗", image: "普通の顔", text: "そう…、おじいちゃんが急にって、信じられない。" },
         { type: "dialog", speakerName: "母親", text: "私もまだ信じられないけど、受け入れるしかないわね。" },
         { type: "dialog", speakerName: "遥斗", image: "普通の顔", text: "分かった…。すぐに帰る。" },
-        { type: "sceneTransition", key: "chapter1_3" },
+        { type: "timelineTransition", timelineID: "chapter1_3" },
     ],
     chapter1_3: [
         { type: "dialog", speakerName: "母親", text: "ありがとう。おじいちゃんも、きっと喜んでいるわ。" },
