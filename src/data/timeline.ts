@@ -23,14 +23,6 @@ export const timelineData: Timelines = {
         { type: "dialog", speakerName: "遥斗", image: "普通の顔", text: "…そうか…。おじいちゃん、ずっと元気だったのに。" },
         { type: "dialog", speakerName: "母親", text: "そうね、突然で驚いてる。でも、もう苦しんでいないから…。" },
         { type: "dialog", speakerName: "遥斗", image: "普通の顔", text: "分かった。すぐに帰るよ。" },
-        {
-            type: "choice",
-            text: "…",
-            choices: [
-                { text: "aa", timelineID: "chapter1_1" },
-                { text: "ee", timelineID: "chapter1_2" },
-            ],
-        },
         { type: "timelineTransition", timelineID: "chapter1_3" },
     ],
     chapter1_2: [

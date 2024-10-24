@@ -3,7 +3,7 @@ import { Scenes } from "./scenes";
 import RoundRectanglePlugin from "phaser3-rex-plugins/plugins/roundrectangle-plugin.js";
 
 const config: Phaser.Types.Core.GameConfig = {
-    type: Phaser.AUTO,
+    type: Phaser.WEBGL,
     parent: "game-container",
     width: 1920,
     height: 1080,

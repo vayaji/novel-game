@@ -78,7 +78,7 @@ export class TimelinePlayer {
         this.hitArea.disableInteractive();
         this.uiLayer.add(new Phaser.GameObjects.Rectangle(this.scene, 0, 0, this.canvasWidth, this.canvasHeight, 0x575757).setOrigin(0, 0).setAlpha(0.72));
 
-        const buttonHeight = 100;
+        const buttonHeight = 120;
         const buttonMargin = 70;
 
         const { width, height } = this.scene.game.canvas;
@@ -87,9 +87,11 @@ export class TimelinePlayer {
         const buttonGroupOriginY = height / 2 - buttonGroupHeight / 2;
 
         choices.forEach((choice, index) => {
-            const y = buttonGroupOriginY + buttonHeight * (index * 0.5) + buttonMargin * index;
+            const y = buttonGroupOriginY + buttonHeight * index + buttonMargin * index;
 
             const button = new RoundRectangle(this.scene, width / 2, y, width - buttonMargin * 5, buttonHeight, 25, 0xffffff).setAlpha(0.83);
+            // const button = new Phaser.GameObjects.Rectangle(this.scene, width / 2, y, width - buttonMargin * 5, buttonHeight, 0xffffff).setAlpha(0.83);
+            button.preFX!.addShadow(0, 3, 0.006, 2, 0x000000, 10);
             button.setInteractive({
                 useHandCursor: true,
             });
