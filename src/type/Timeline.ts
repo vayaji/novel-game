@@ -12,6 +12,11 @@ type SetBackgroundEvent = {
     key: string;
 };
 
+type SetLocationEvent = {
+    type: "setLocation";
+    name: string;
+};
+
 type ChoiceEvent = {
     type: "choice";
     text: string;
@@ -21,6 +26,7 @@ type ChoiceEvent = {
 type TimelineTransitionEvent = {
     type: "timelineTransition";
     timelineID: string;
+    fadeTime?: number;
 };
 
 type SceneTransitionEvent = {
@@ -30,4 +36,4 @@ type SceneTransitionEvent = {
     fadeTime?: number;
 };
 
-export type Timeline = (DialogEvent | SetBackgroundEvent | ChoiceEvent | TimelineTransitionEvent | SceneTransitionEvent)[];
+export type Timeline = (DialogEvent | SetBackgroundEvent | SetLocationEvent | ChoiceEvent | TimelineTransitionEvent | SceneTransitionEvent)[];

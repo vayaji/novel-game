@@ -2,19 +2,23 @@ import RoundRectangle from "phaser3-rex-plugins/plugins/gameobjects/shape/roundr
 import { Choice } from "../type/Choice";
 import { Timeline } from "../type/Timeline";
 import { DialogBox } from "./DialogBox";
+import { timelineData } from "../data/timeline";
 
 export class TimelinePlayer {
+    private timelineID: string;
     private timeline: Timeline;
     private timelineIndex: number = 0;
     private hitArea: Phaser.GameObjects.Zone;
     private uiLayer: Phaser.GameObjects.Container;
+    private backgroundKey?: string;
+    private locationName?: string;
 
     constructor(private scene: Phaser.Scene, private dialogBox: DialogBox, private canvasWidth: number, private canvasHeight: number) {
         scene.add.existing(dialogBox);
         this.uiLayer = this.scene.add.container(0, 0);
-        this.dialogBox.setText("セリフ、ダミーテキストダミーテキスト。\nダミーテキストダミーテキスト。");
-        this.dialogBox.setLocation("場所");
-        this.dialogBox.setSpeakerName("遥斗");
+        // this.dialogBox.setText("セリフ、ダミーテキストダミーテキスト。\nダミーテキストダミーテキスト。");
+        // this.dialogBox.setLocation("場所");
+        // this.dialogBox.setSpeakerName("遥斗");
 
         const polygon = new Phaser.Geom.Polygon([0, 0, 400, 0, 350, 70, 0, 70]);
         // const graphics = this.add.graphics({ x: 0, y: 50 });
@@ -36,8 +40,18 @@ export class TimelinePlayer {
         });
     }
 
-    start(timeline: Timeline) {
-        this.timeline = timeline;
+    start(timelineID: string, index: number = 0, backgroundKey?: string, locationName?: string) {
+        this.timelineID = timelineID;
+        this.timeline = timelineData[timelineID];
+        this.timelineIndex = index;
+        if (backgroundKey) {
+            this.dialogBox.setBackgroundImage(backgroundKey);
+            this.backgroundKey = backgroundKey;
+        }
+        if (locationName) {
+            this.dialogBox.setLocation(locationName);
+            this.locationName = locationName;
+        }
         this.next();
     }
 
@@ -46,12 +60,21 @@ export class TimelinePlayer {
             return;
         }
 
+        localStorage.setItem("timeline", this.timelineID);
+        localStorage.setItem("timelineIndex", this.timelineIndex.toString());
+
         const timelineEvent = this.timeline[this.timelineIndex++];
 
         switch (timelineEvent.type) {
             case "setBackground":
                 this.dialogBox.setBackgroundImage(timelineEvent.key);
                 this.next();
+                this.backgroundKey = timelineEvent.key;
+                break;
+            case "setLocation":
+                this.dialogBox.setLocation(timelineEvent.name);
+                this.next();
+                this.locationName = timelineEvent.name;
                 break;
             case "dialog":
                 this.dialogBox.setText(timelineEvent.text);
@@ -61,9 +84,7 @@ export class TimelinePlayer {
                 }
                 break;
             case "timelineTransition":
-                this.scene.scene.restart({
-                    timelineID: timelineEvent.timelineID,
-                });
+                this.changegTimeline(timelineEvent.timelineID, timelineEvent.fadeTime, this.backgroundKey, this.locationName);
                 break;
             case "choice":
                 this.setChoiceButtons(timelineEvent.choices);
@@ -91,7 +112,7 @@ export class TimelinePlayer {
 
             const button = new RoundRectangle(this.scene, width / 2, y, width - buttonMargin * 5, buttonHeight, 25, 0xffffff).setAlpha(0.83);
             // const button = new Phaser.GameObjects.Rectangle(this.scene, width / 2, y, width - buttonMargin * 5, buttonHeight, 0xffffff).setAlpha(0.83);
-            button.preFX!.addShadow(0, 3, 0.006, 2, 0x000000, 10);
+            // button.preFX!.addShadow(0, 3, 0.006, 2, 0x000000, 10);
             button.setInteractive({
                 useHandCursor: true,
             });
@@ -105,9 +126,7 @@ export class TimelinePlayer {
             });
 
             button.on("pointerdown", () => {
-                this.scene.scene.restart({
-                    timelineID: choice.timelineID,
-                });
+                this.changegTimeline(choice.timelineID, choice.fadeTime, this.backgroundKey, this.locationName);
             });
 
             this.uiLayer.add(button);
@@ -115,5 +134,27 @@ export class TimelinePlayer {
             const buttonText = new Phaser.GameObjects.Text(this.scene, width / 2, y, choice.text, { fontSize: "32px", fontFamily: "Helvetica", color: "#707070" }).setOrigin(0.5);
             this.uiLayer.add(buttonText);
         });
+    }
+
+    private changegTimeline(timelineID: string, fadeTime?: number, backgroundKey?: string, locationName?: string) {
+        const data = {
+            timelineID: timelineID,
+            ...(backgroundKey && { backgroundKey: backgroundKey }),
+            ...(locationName && { locationName: locationName }),
+        };
+        console.log(backgroundKey, locationName);
+        if (fadeTime) {
+            this.scene.cameras.main.fadeOut(fadeTime / 2, 0, 0, 0);
+            this.scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+                this.scene.scene.restart({
+                    ...data,
+                    fadeTime: fadeTime / 2,
+                });
+            });
+        } else {
+            this.scene.scene.restart({
+                ...data,
+            });
+        }
     }
 }
