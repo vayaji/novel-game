@@ -3,6 +3,7 @@ import { Choice } from "../type/Choice";
 import { Timeline } from "../type/Timeline";
 import { DialogBox } from "./DialogBox";
 import { timelineData } from "../data/timeline";
+import { Util } from "../Util";
 
 export class TimelinePlayer {
     private timelineID: string;
@@ -12,6 +13,7 @@ export class TimelinePlayer {
     private uiLayer: Phaser.GameObjects.Container;
     private backgroundKey?: string;
     private locationName?: string;
+    private canNext: boolean = true;
 
     constructor(private scene: Phaser.Scene, private dialogBox: DialogBox, private canvasWidth: number, private canvasHeight: number) {
         scene.add.existing(dialogBox);
@@ -32,6 +34,19 @@ export class TimelinePlayer {
             useHandCursor: true,
         });
         this.hitArea.on("pointerdown", () => {
+            if (this.dialogBox.isAnimating()) {
+                this.dialogBox.forceStop();
+            } else {
+                this.next();
+            }
+        });
+        this.scene.input.keyboard!.on("keydown", (event: KeyboardEvent) => {
+            if (!this.canNext) {
+                return;
+            }
+            if (event.key !== "Enter" && event.key !== " ") {
+                return;
+            }
             if (this.dialogBox.isAnimating()) {
                 this.dialogBox.forceStop();
             } else {
@@ -77,7 +92,8 @@ export class TimelinePlayer {
                 this.locationName = timelineEvent.name;
                 break;
             case "dialog":
-                this.dialogBox.setText(timelineEvent.text);
+                const wrappedLine = Util.autoWrap(timelineEvent.text, this.canvasWidth - 50 * 6, this.scene);
+                this.dialogBox.setText(wrappedLine);
                 this.dialogBox.setSpeakerName(timelineEvent.speakerName);
                 if (timelineEvent.image) {
                     this.dialogBox.setCharacterImage(timelineEvent.image);
@@ -85,6 +101,20 @@ export class TimelinePlayer {
                 break;
             case "timelineTransition":
                 this.changegTimeline(timelineEvent.timelineID, timelineEvent.fadeTime, this.backgroundKey, this.locationName);
+                break;
+            case "sceneTransition":
+                console.log(timelineEvent.data);
+                if (timelineEvent.fadeTime) {
+                    this.scene.cameras.main.fadeOut(timelineEvent.fadeTime / 2, 0, 0, 0);
+                    this.scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+                        this.scene.scene.start(timelineEvent.name, {
+                            ...timelineEvent.data,
+                            fadeTime: timelineEvent.fadeTime! / 2,
+                        });
+                    });
+                } else {
+                    this.scene.scene.start(timelineEvent.name, timelineEvent.data);
+                }
                 break;
             case "choice":
                 this.setChoiceButtons(timelineEvent.choices);
@@ -97,6 +127,7 @@ export class TimelinePlayer {
         }
 
         this.hitArea.disableInteractive();
+        this.canNext = false;
         this.uiLayer.add(new Phaser.GameObjects.Rectangle(this.scene, 0, 0, this.canvasWidth, this.canvasHeight, 0x575757).setOrigin(0, 0).setAlpha(0.72));
 
         const buttonHeight = 120;

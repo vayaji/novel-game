@@ -4,8 +4,9 @@ export class PreloaderScene extends Phaser.Scene {
     }
 
     preload() {
-        this.add.text(100, 100, "preloader");
-        this.add.sprite(0, 0, "background").setOrigin(0, 0);
+        this.load.setPath("src/assets/");
+        // this.add.text(100, 100, "preloader");
+        // this.add.sprite(0, 0, "background").setOrigin(0, 0);
         const progressBar = this.add.graphics();
         const progressBox = this.add.graphics();
         progressBox.fillStyle(0x222222, 0.8);
@@ -70,23 +71,27 @@ export class PreloaderScene extends Phaser.Scene {
             image: [
                 {
                     key: "logo",
-                    url: "src/assets/logo.png",
+                    url: "logo.png",
                 },
                 {
                     key: "robot",
-                    url: "src/assets/robot.png",
+                    url: "robot.png",
                 },
                 {
                     key: "street",
-                    url: "src/assets/street.png",
+                    url: "street.png",
+                },
+                {
+                    key: "忙しい街の風景",
+                    url: "background/busy.png",
                 },
                 {
                     key: "home",
-                    url: "src/assets/background/home.png",
+                    url: "background/home.png",
                 },
                 {
                     key: "haruto-normal",
-                    url: "src/assets/character/haruto/normal.png",
+                    url: "character/haruto/normal.png",
                 },
             ],
         };

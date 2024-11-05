@@ -19,7 +19,6 @@ type SetLocationEvent = {
 
 type ChoiceEvent = {
     type: "choice";
-    text: string;
     choices: Choice[];
 };
 
@@ -31,7 +30,7 @@ type TimelineTransitionEvent = {
 
 type SceneTransitionEvent = {
     type: "sceneTransition";
-    key: string;
+    name: string;
     data?: any;
     fadeTime?: number;
 };

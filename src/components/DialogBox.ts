@@ -35,7 +35,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
         this.canvasHeight = canvasHeight;
         this.textStyle = textStyle;
 
-        this.backgroundImage = this.scene.add.image(0, 0, "").setOrigin(0, 0.2).setScale(3.0);
+        this.backgroundImage = this.scene.add.image(0, 0, "").setOrigin(0, 0.2).setScale(1.0);
         this.backgroundImage.setVisible(false);
 
         const height = canvasHeight / 2.5;
@@ -51,6 +51,10 @@ export class DialogBox extends Phaser.GameObjects.Container {
         this.textBoxObject = new Phaser.GameObjects.Rectangle(this.scene, 0, y, width, height, 0xffffff).setOrigin(0, 0);
         this.add(this.textBoxObject);
 
+        this.textStyle.wordWrap = {
+            width: this.canvasWidth - this.padding * 6,
+            useAdvancedWrap: true,
+        };
         this.textObject = new Phaser.GameObjects.Text(this.scene, this.padding * 3, y + this.padding + 70, "", this.textStyle).setOrigin(0, 0);
         this.add(this.textObject);
 
