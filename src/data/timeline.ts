@@ -16,7 +16,7 @@ export const timelineData: Timelines = {
             type: "dialog",
             speakerName: "ナレーション",
             image: "",
-            text: "都会のビル群の中、。行き交う人々に押し流されながら、ただ目の前のタスクをこなすだけの毎日が続いていた。",
+            text: "都会のビル群の中、行き交う人々に押し流されながら、ただ目の前のタスクをこなすだけの毎日が続いていた。",
         },
         {
             type: "dialog",
@@ -232,5 +232,19 @@ export const timelineData: Timelines = {
             image: "",
             text: "彼は過去の記憶を遡りながら、霞ヶ丘の静かな風景を見つめた。夏音が消えた理由、そして手紙に込められた謎。それを解き明かすために、遥斗は再びこの町で過去と向き合うことを決意するのだった。",
         },
+        {
+            type: "choice",
+            choices: [
+                {
+                    text: "終わり",
+                    timelineID: "chapter2",
+                },
+                {
+                    text: "もう一回",
+                    timelineID: "chapter1",
+                },
+            ],
+        },
     ],
+    chapter2: [],
 };

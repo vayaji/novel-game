@@ -4,14 +4,15 @@ import RoundRectanglePlugin from "phaser3-rex-plugins/plugins/roundrectangle-plu
 
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.WEBGL,
-    parent: "game-container",
-    width: 1920,
-    height: 1080,
     backgroundColor: "#D6D6D6",
     scale: {
-        mode: Phaser.Scale.RESIZE,
-        width: "100%",
-        height: "100%",
+        parent: "game-container",
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 1920,
+        height: 1080,
+        // width: "100%",
+        // height: "100%",
     },
     scene: Scenes,
     plugins: {

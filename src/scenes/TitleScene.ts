@@ -12,6 +12,7 @@ export class TitleScene extends Phaser.Scene {
         });
 
         startButton.on("pointerdown", () => {
+            // this.scene.scene.scale.startFullscreen();
             this.scene.start("main");
         });
     }

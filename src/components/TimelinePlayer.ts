@@ -16,6 +16,8 @@ export class TimelinePlayer {
     private canNext: boolean = true;
 
     constructor(private scene: Phaser.Scene, private dialogBox: DialogBox, private canvasWidth: number, private canvasHeight: number) {
+        console.log(this.timelineIndex);
+        // this.timelineIndex = 0;
         scene.add.existing(dialogBox);
         this.uiLayer = this.scene.add.container(0, 0);
         // this.dialogBox.setText("セリフ、ダミーテキストダミーテキスト。\nダミーテキストダミーテキスト。");
@@ -174,6 +176,8 @@ export class TimelinePlayer {
             ...(locationName && { locationName: locationName }),
         };
         console.log(backgroundKey, locationName);
+        localStorage.setItem("timeline", timelineID);
+        localStorage.setItem("timelineIndex", "0");
         if (fadeTime) {
             this.scene.cameras.main.fadeOut(fadeTime / 2, 0, 0, 0);
             this.scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {

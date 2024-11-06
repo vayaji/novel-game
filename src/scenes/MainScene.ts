@@ -16,18 +16,18 @@ export class MainScene extends Phaser.Scene {
     }
 
     init(data: any) {
-        // const timelineID = data.timelineID || localStorage.getItem("timeline") || "chapter1";
-        const timelineID = data.timelineID || "chapter1";
+        const timelineID = data.timelineID || localStorage.getItem("timeline") || "chapter1";
+        // const timelineID = data.timelineID || "chapter1";
         if (!(timelineID in timelineData)) {
             console.error("invalid timelineID: " + timelineID);
         }
 
         this.timeline = timelineData[timelineID];
         this.timelineID = timelineID;
-        // this.timelineIndex = parseInt(localStorage.getItem("timelineIndex") || "0");
-        this.timelineIndex = 0;
+        this.timelineIndex = parseInt(localStorage.getItem("timelineIndex") || "0");
+        // this.timelineIndex = 0;
 
-        console.log(data);
+        console.log(data, this.timelineIndex);
         if (data.fadeTime) {
             this.cameras.main.fadeIn(data.fadeTime, 0, 0, 0);
         }
