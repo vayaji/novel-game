@@ -1,3 +1,8 @@
+:root {
+    /* TODO: chrome以外もサポートする。 */
+    interpolate-size: allow-keywords;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -12,4 +17,50 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#qr-modal-background {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+#qr-modal-background.visible {
+    display: block;
+}
+
+#qr {
+    /* display: none; */
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+#qr canvas {
+    width: 100%;
+    height: 100%;
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+}
+
+#qr.visible {
+    /* display: block; */
+    padding: 10px;
+    width: auto;
+    height: auto;
+    transition: all 0.3s ease-in-out;
 }

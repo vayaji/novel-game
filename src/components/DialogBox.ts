@@ -67,6 +67,26 @@ export class DialogBox extends Phaser.GameObjects.Container {
         this.add(this.characterImage);
     }
 
+    resize(canvasWidth: number, canvasHeight: number) {
+        this.canvasWidth = canvasWidth;
+        this.canvasHeight = canvasHeight;
+        this.setSize(canvasWidth, canvasHeight);
+
+        const height = this.canvasHeight / 2.5;
+        const width = this.canvasWidth;
+        const y = this.canvasHeight - height;
+
+        this.locationTextObject.setPosition(175, this.padding + 70 / 2);
+        this.textBoxObject.setPosition(0, y);
+        this.textObject.setPosition(this.padding * 3, y + this.padding + 70);
+        this.speakerTextObject.setPosition(this.padding * 2, y + this.padding);
+        this.characterImage.setPosition(this.canvasWidth, 0);
+    }
+
+    getTextStyle(): Phaser.Types.GameObjects.Text.TextStyle {
+        return this.textStyle;
+    }
+
     getZone(): Phaser.GameObjects.Zone {
         return new Phaser.GameObjects.Zone(this.scene, 0, this.canvasHeight - this.height, this.width, this.height).setOrigin(0, 0);
     }

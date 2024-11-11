@@ -47,8 +47,6 @@ export class PreloaderScene extends Phaser.Scene {
         });
         assetText.setOrigin(0.5, 0.5);
 
-        this.load.plugin("rexroundrectangleplugin", "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexroundrectangleplugin.min.js", true);
-
         this.load.on("progress", function (value: number) {
             percentText.setText(value * 100 + "%");
             progressBar.clear();
@@ -94,10 +92,25 @@ export class PreloaderScene extends Phaser.Scene {
                     url: "character/haruto/normal.png",
                 },
             ],
+            svg: [
+                {
+                    key: "qr",
+                    url: "qr.svg",
+                    width: 128,
+                    height: 128,
+                },
+            ],
         };
 
         for (const resource of resources.image) {
             this.load.image(resource.key, resource.url);
+        }
+
+        for (const resource of resources.svg) {
+            this.load.svg(resource.key, resource.url, {
+                width: resource.width,
+                height: resource.height,
+            });
         }
     }
 

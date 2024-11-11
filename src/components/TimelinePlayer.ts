@@ -20,12 +20,8 @@ export class TimelinePlayer {
         // this.timelineIndex = 0;
         scene.add.existing(dialogBox);
         this.uiLayer = this.scene.add.container(0, 0);
-        // this.dialogBox.setText("セリフ、ダミーテキストダミーテキスト。\nダミーテキストダミーテキスト。");
-        // this.dialogBox.setLocation("場所");
-        // this.dialogBox.setSpeakerName("遥斗");
 
         const polygon = new Phaser.Geom.Polygon([0, 0, 400, 0, 350, 70, 0, 70]);
-        // const graphics = this.add.graphics({ x: 0, y: 50 });
         const graphics = new Phaser.GameObjects.Graphics(scene, { x: 0, y: 50 });
         graphics.fillStyle(0xffffff);
         graphics.fillPoints(polygon.points, true);
@@ -36,6 +32,9 @@ export class TimelinePlayer {
             useHandCursor: true,
         });
         this.hitArea.on("pointerdown", () => {
+            if (!this.canNext) {
+                return;
+            }
             if (this.dialogBox.isAnimating()) {
                 this.dialogBox.forceStop();
             } else {
@@ -55,9 +54,15 @@ export class TimelinePlayer {
                 this.next();
             }
         });
+
+        // window.addEventListener("resize", () => {
+        //     console.log(window.innerWidth, window.innerHeight);
+        //     this.resize(scene.game.canvas.width, scene.game.canvas.height);
+        // });
     }
 
     start(timelineID: string, index: number = 0, backgroundKey?: string, locationName?: string) {
+        // TODO: index直接指定しないでindex回next()する。
         this.timelineID = timelineID;
         this.timeline = timelineData[timelineID];
         this.timelineIndex = index;
@@ -70,6 +75,17 @@ export class TimelinePlayer {
             this.locationName = locationName;
         }
         this.next();
+    }
+
+    resize(canvasWidth: number, canvasHeight: number) {
+        this.canvasWidth = canvasWidth;
+        this.canvasHeight = canvasHeight;
+        this.dialogBox.resize(canvasWidth, canvasHeight);
+    }
+
+    setCanNext(canNext: boolean) {
+        console.log(canNext);
+        this.canNext = canNext;
     }
 
     private next() {
@@ -94,7 +110,7 @@ export class TimelinePlayer {
                 this.locationName = timelineEvent.name;
                 break;
             case "dialog":
-                const wrappedLine = Util.autoWrap(timelineEvent.text, this.canvasWidth - 50 * 6, this.scene);
+                const wrappedLine = Util.autoWrap(timelineEvent.text, this.canvasWidth - 50 * 6, this.scene, this.dialogBox.getTextStyle());
                 this.dialogBox.setText(wrappedLine);
                 this.dialogBox.setSpeakerName(timelineEvent.speakerName);
                 if (timelineEvent.image) {
@@ -191,5 +207,13 @@ export class TimelinePlayer {
                 ...data,
             });
         }
+    }
+
+    getTimelineID() {
+        return this.timelineID;
+    }
+
+    getTimelineIndex() {
+        return this.timelineIndex;
     }
 }
