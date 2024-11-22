@@ -5,7 +5,7 @@ import WebFontLoaderPlugin from "phaser3-rex-plugins/plugins/webfontloader-plugi
 
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.WEBGL,
-    backgroundColor: "#D6D6D6",
+    backgroundColor: "#FFFFFF",
     scale: {
         parent: "game-container",
         mode: Phaser.Scale.FIT,

@@ -47,7 +47,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
         this.setSize(width, height);
         // console.log(width, height);
 
-        this.locationTextObject = new Phaser.GameObjects.Text(this.scene, this.padding * 3, this.padding + 70 / 2, "", this.textStyle).setOrigin(0, 0);
+        this.locationTextObject = new Phaser.GameObjects.Text(this.scene, 350 / 2, 50 + 70 / 2, "", this.textStyle).setOrigin(0.5, 0.5);
         this.add(this.locationTextObject);
 
         this.textBoxObject = new Phaser.GameObjects.Rectangle(this.scene, 0, y, width, height, 0xffffff).setOrigin(0, 0);

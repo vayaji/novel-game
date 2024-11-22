@@ -7,22 +7,21 @@ export class PreloaderScene extends Phaser.Scene {
 
     preload() {
         this.load.setPath("assets/");
+        const { width, height } = this.cameras.main;
         // this.add.text(100, 100, "preloader");
         // this.add.sprite(0, 0, "background").setOrigin(0, 0);
-        // const progressBar = this.add.graphics();
         // const progressBox = this.add.graphics();
+        const progressBar = this.add.graphics();
         // progressBox.fillStyle(0x222222, 0.8);
-        // progressBox.fillRect(240, 270, 320, 50);
+        // progressBox.fillRect(width / 2 - 160, height / 2 + 20, 320, 20);
 
-        const { width } = this.cameras.main;
-        const { height } = this.cameras.main;
         const loadingText = this.make.text({
             x: width / 2,
             y: height / 2 - 50,
             text: "Loading...",
             style: {
                 font: "20px 'Noto Sans JP'",
-                color: "#ffffff",
+                color: "#69A8D3",
             },
         });
         loadingText.setOrigin(0.5, 0.5);
@@ -33,38 +32,38 @@ export class PreloaderScene extends Phaser.Scene {
             text: "0%",
             style: {
                 font: "18px 'Noto Sans JP'",
-                color: "#ffffff",
+                color: "#69A8D3",
             },
         });
         percentText.setOrigin(0.5, 0.5);
 
-        var assetText = this.make.text({
-            x: width / 2,
-            y: height / 2 + 50,
-            text: "",
-            style: {
-                font: "18px 'Noto Sans JP'",
-                color: "#ffffff",
-            },
-        });
-        assetText.setOrigin(0.5, 0.5);
+        // var assetText = this.make.text({
+        //     x: width / 2,
+        //     y: height / 2 + 50,
+        //     text: "",
+        //     style: {
+        //         font: "18px 'Noto Sans JP'",
+        //         color: "#69A8D3",
+        //     },
+        // });
+        // assetText.setOrigin(0.5, 0.5);
 
         this.load.on("progress", function (value: number) {
-            percentText.setText(value * 100 + "%");
-            // progressBar.clear();
-            // progressBar.fillStyle(0xffffff, 1);
-            // progressBar.fillRect(250, 280, 300 * value, 30);
+            percentText.setText(Math.floor(value * 100) + "%");
+            progressBar.clear();
+            progressBar.fillStyle(0x69a8d3, 1);
+            progressBar.fillRect(width / 2 - 158, height / 2 + 22, 158 * 2 * value, 16);
         });
 
         this.load.on("fileprogress", function (file: Phaser.Loader.File) {
-            assetText.setText("Loading asset: " + file.key);
+            // assetText.setText("Loading asset: " + file.key);
         });
         this.load.on("complete", function () {
-            // progressBar.destroy();
+            progressBar.destroy();
             // progressBox.destroy();
             loadingText.destroy();
             percentText.destroy();
-            assetText.destroy();
+            // assetText.destroy();
         });
 
         const resources = {
