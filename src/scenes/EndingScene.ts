@@ -15,8 +15,8 @@ export class EndingScene extends Phaser.Scene {
 
     create() {
         const { width, height } = this.game.canvas;
-        this.add.text(width / 2, height / 2 - 100, this.text, { fontSize: "64px", fontFamily: "Helvetica" }).setOrigin(0.5, 0.5);
-        const restartButton = this.add.text(width / 2, height / 2, "back to title", { fontSize: "32px", fontFamily: "Helvetica" }).setOrigin(0.5, 0.5);
+        this.add.text(width / 2, height / 2 - 100, this.text, { fontSize: "64px", fontFamily: "Noto Sans  JP" }).setOrigin(0.5, 0.5);
+        const restartButton = this.add.text(width / 2, height / 2, "back to title", { fontSize: "32px", fontFamily: "Noto Sans  JP" }).setOrigin(0.5, 0.5);
         restartButton.setInteractive({
             useHandCursor: true,
         });

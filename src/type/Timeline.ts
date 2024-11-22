@@ -35,4 +35,10 @@ type SceneTransitionEvent = {
     fadeTime?: number;
 };
 
-export type Timeline = (DialogEvent | SetBackgroundEvent | SetLocationEvent | ChoiceEvent | TimelineTransitionEvent | SceneTransitionEvent)[];
+type PlaySoundEvent = {
+    type: "playSound";
+    key: string;
+    loop: boolean;
+};
+
+export type Timeline = (DialogEvent | SetBackgroundEvent | SetLocationEvent | ChoiceEvent | TimelineTransitionEvent | SceneTransitionEvent | PlaySoundEvent)[];

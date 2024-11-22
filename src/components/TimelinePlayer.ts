@@ -95,19 +95,21 @@ export class TimelinePlayer {
 
         localStorage.setItem("timeline", this.timelineID);
         localStorage.setItem("timelineIndex", this.timelineIndex.toString());
+        localStorage.setItem("backgroundKey", this.backgroundKey || "");
+        localStorage.setItem("locationName", this.locationName || "");
 
         const timelineEvent = this.timeline[this.timelineIndex++];
 
         switch (timelineEvent.type) {
             case "setBackground":
                 this.dialogBox.setBackgroundImage(timelineEvent.key);
-                this.next();
                 this.backgroundKey = timelineEvent.key;
+                this.next();
                 break;
             case "setLocation":
                 this.dialogBox.setLocation(timelineEvent.name);
-                this.next();
                 this.locationName = timelineEvent.name;
+                this.next();
                 break;
             case "dialog":
                 const wrappedLine = Util.autoWrap(timelineEvent.text, this.canvasWidth - 50 * 6, this.scene, this.dialogBox.getTextStyle());
@@ -136,6 +138,10 @@ export class TimelinePlayer {
                 break;
             case "choice":
                 this.setChoiceButtons(timelineEvent.choices);
+                break;
+            case "playSound":
+                // this.scene.sound.play(timelineEvent.key);
+                this.next();
                 break;
         }
     }
@@ -180,7 +186,7 @@ export class TimelinePlayer {
 
             this.uiLayer.add(button);
 
-            const buttonText = new Phaser.GameObjects.Text(this.scene, width / 2, y, choice.text, { fontSize: "32px", fontFamily: "Helvetica", color: "#707070" }).setOrigin(0.5);
+            const buttonText = new Phaser.GameObjects.Text(this.scene, width / 2, y, choice.text, { fontSize: "32px", fontFamily: "Noto Sans  JP", color: "#707070" }).setOrigin(0.5);
             this.uiLayer.add(buttonText);
         });
     }
@@ -215,5 +221,13 @@ export class TimelinePlayer {
 
     getTimelineIndex() {
         return this.timelineIndex;
+    }
+
+    getBackgroundKey() {
+        return this.backgroundKey;
+    }
+
+    getLocationName() {
+        return this.locationName;
     }
 }

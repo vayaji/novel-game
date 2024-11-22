@@ -1,6 +1,7 @@
 import * as Phaser from "phaser";
 import { Scenes } from "./scenes";
 import RoundRectanglePlugin from "phaser3-rex-plugins/plugins/roundrectangle-plugin.js";
+import WebFontLoaderPlugin from "phaser3-rex-plugins/plugins/webfontloader-plugin.js";
 
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.WEBGL,
@@ -20,6 +21,11 @@ const config: Phaser.Types.Core.GameConfig = {
             {
                 key: "rexRoundRectanglePlugin",
                 plugin: RoundRectanglePlugin,
+                start: true,
+            },
+            {
+                key: "rexWebFontLoader",
+                plugin: WebFontLoaderPlugin,
                 start: true,
             },
         ],

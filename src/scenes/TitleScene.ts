@@ -5,13 +5,21 @@ export class TitleScene extends Phaser.Scene {
 
     create() {
         const { width, height } = this.game.canvas;
-        this.add.image(width / 2, height / 2, "title").setOrigin(0.5, 0.5);
+        const image = this.add.image(width / 2, height / 2, "title").setOrigin(0.5, 0.5);
 
-        this.input.keyboard!.on("keydown", (event: KeyboardEvent) => {
+        this.input.keyboard!.on("keydown", () => {
             this.scene.start("main");
         });
-        // this.add.text(width / 2, height / 2 - 100, "霞ヶ丘の夏音", { fontSize: "64px", fontFamily: "Helvetica" }).setOrigin(0.5, 0.5);
-        // const startButton = this.add.text(width / 2, height / 2, "Click to start", { fontSize: "64px", fontFamily: "Helvetica" }).setOrigin(0.5, 0.5);
+
+        image.setInteractive({
+            useHandCursor: true,
+        });
+
+        image.on("pointerdown", () => {
+            this.scene.start("main");
+        });
+        // this.add.text(width / 2, height / 2 - 100, "霞ヶ丘の夏音", { fontSize: "64px", fontFamily: "Noto Sans  JP" }).setOrigin(0.5, 0.5);
+        // const startButton = this.add.text(width / 2, height / 2, "Click to start", { fontSize: "64px", fontFamily: "Noto Sans  JP" }).setOrigin(0.5, 0.5);
         // startButton.setInteractive({
         //     useHandCursor: true,
         // });

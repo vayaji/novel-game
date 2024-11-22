@@ -28,7 +28,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
     private backgroundImage: Phaser.GameObjects.Image;
     private backgroundTexture?: string;
 
-    constructor(scene: Phaser.Scene, { canvasWidth, canvasHeight, textStyle = { fontSize: "32px", fontFamily: "Helvetica", color: "#707070" } }: DialogBoxConfig) {
+    constructor(scene: Phaser.Scene, { canvasWidth, canvasHeight, textStyle = { fontSize: "32px", fontFamily: "Noto Sans  JP", color: "#707070" } }: DialogBoxConfig) {
         super(scene, 0, 0);
 
         this.canvasWidth = canvasWidth;

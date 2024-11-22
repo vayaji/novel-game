@@ -1,7 +1,7 @@
 import { loadDefaultJapaneseParser } from "budoux";
 
 export class Util {
-    static autoWrap(text: string, width: number, scene: Phaser.Scene, textStyle: Phaser.Types.GameObjects.Text.TextStyle = { fontSize: "32px", fontFamily: "Helvetica", color: "#707070" }) {
+    static autoWrap(text: string, width: number, scene: Phaser.Scene, textStyle: Phaser.Types.GameObjects.Text.TextStyle = { fontSize: "32px", fontFamily: "Noto Sans  JP", color: "#707070" }) {
         width -= 1;
         const parser = loadDefaultJapaneseParser();
         const lines = parser.parse(text);

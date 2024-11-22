@@ -5,6 +5,7 @@ import { TimelinePlayer } from "../components/TimelinePlayer";
 import { timelineData } from "../data/timeline";
 import { Timeline } from "../type/Timeline";
 import QRCodeStyling from "qr-code-styling";
+import { BACKGROUND_KEY, LOCATION_NAME, TIMELINE_ID, TIMELINE_INDEX } from "../constants";
 
 export class MainScene extends Phaser.Scene {
     private timeline?: Timeline;
@@ -19,14 +20,17 @@ export class MainScene extends Phaser.Scene {
 
     init(data: any) {
         const params = new URLSearchParams(window.location.search);
-        console.log(params.get("timelineID"), params.get("timelineIndex"));
-        this.timelineID = params.get("timelineID") || data.timelineID || localStorage.getItem("timeline") || "chapter1";
-        this.timelineIndex = parseInt(params.get("timelineIndex")!) || parseInt(localStorage.getItem("timelineIndex")!) || 0;
+        console.log(params.get(TIMELINE_ID), params.get(TIMELINE_INDEX));
+        this.timelineID = params.get(TIMELINE_ID) || data.timelineID || localStorage.getItem("timeline") || "chapter1";
+        this.timelineIndex = parseInt(params.get(TIMELINE_INDEX)!) || parseInt(localStorage.getItem("timelineIndex")!) || 0;
         if (!(this.timelineID in timelineData)) {
             console.error("invalid timelineID: " + this.timelineID);
         }
 
         this.timeline = timelineData[this.timelineID];
+
+        this.backgroundKey = params.get(BACKGROUND_KEY) || localStorage.getItem("backgroundKey") || "";
+        this.locationName = params.get(LOCATION_NAME) || localStorage.getItem("locationName") || "";
 
         // console.log(data, this.timelineIndex);
         if (data.fadeTime) {
@@ -54,7 +58,7 @@ export class MainScene extends Phaser.Scene {
             fontSize = "42px";
         }
         // console.log(fontSize, width < 1000, width);
-        const dialogBoxConfig: DialogBoxConfig = { canvasWidth: width, canvasHeight: height, textStyle: { fontSize, fontFamily: "Helvetica", color: "#707070" } };
+        const dialogBoxConfig: DialogBoxConfig = { canvasWidth: width, canvasHeight: height, textStyle: { fontSize, fontFamily: "Noto Sans  JP", color: "#707070" } };
         const dialogBox = new DialogBox(this, dialogBoxConfig);
         const timelinePlayer = new TimelinePlayer(this, dialogBox, width, height);
         timelinePlayer.start(this.timelineID, this.timelineIndex, this.backgroundKey, this.locationName);
@@ -85,8 +89,10 @@ export class MainScene extends Phaser.Scene {
         qrCode.append(qrElement);
 
         exportIcon.on("pointerdown", () => {
-            qrCode.update({ data: `${window.location.href}?timelineID=${timelinePlayer.getTimelineID()}&timelineIndex=${timelinePlayer.getTimelineIndex() - 1}` });
-            console.log(`${window.location.href}?timelineID=${timelinePlayer.getTimelineID()}&timelineIndex=${timelinePlayer.getTimelineIndex() - 1}`);
+            let url = `${window.location.href}?${TIMELINE_ID}=${timelinePlayer.getTimelineID()}&${TIMELINE_INDEX}=${timelinePlayer.getTimelineIndex() - 1}&${BACKGROUND_KEY}=${timelinePlayer.getBackgroundKey()}&${LOCATION_NAME}=${timelinePlayer.getLocationName()}`;
+            url = encodeURI(url);
+            qrCode.update({ data: url });
+            console.log(timelinePlayer.getBackgroundKey(), timelinePlayer.getLocationName(), url);
             exportIcon.setInteractive(false);
             timelinePlayer.setCanNext(false);
             const qrModalElement = document.getElementById("qr-modal-background")!;

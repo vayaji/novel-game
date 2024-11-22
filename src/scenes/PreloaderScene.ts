@@ -1,3 +1,5 @@
+import WebFontLoader from "phaser3-rex-plugins/plugins/webfontloader";
+
 export class PreloaderScene extends Phaser.Scene {
     constructor() {
         super("preloader");
@@ -7,10 +9,10 @@ export class PreloaderScene extends Phaser.Scene {
         this.load.setPath("assets/");
         // this.add.text(100, 100, "preloader");
         // this.add.sprite(0, 0, "background").setOrigin(0, 0);
-        const progressBar = this.add.graphics();
-        const progressBox = this.add.graphics();
-        progressBox.fillStyle(0x222222, 0.8);
-        progressBox.fillRect(240, 270, 320, 50);
+        // const progressBar = this.add.graphics();
+        // const progressBox = this.add.graphics();
+        // progressBox.fillStyle(0x222222, 0.8);
+        // progressBox.fillRect(240, 270, 320, 50);
 
         const { width } = this.cameras.main;
         const { height } = this.cameras.main;
@@ -49,17 +51,17 @@ export class PreloaderScene extends Phaser.Scene {
 
         this.load.on("progress", function (value: number) {
             percentText.setText(value * 100 + "%");
-            progressBar.clear();
-            progressBar.fillStyle(0xffffff, 1);
-            progressBar.fillRect(250, 280, 300 * value, 30);
+            // progressBar.clear();
+            // progressBar.fillStyle(0xffffff, 1);
+            // progressBar.fillRect(250, 280, 300 * value, 30);
         });
 
         this.load.on("fileprogress", function (file: Phaser.Loader.File) {
             assetText.setText("Loading asset: " + file.key);
         });
         this.load.on("complete", function () {
-            progressBar.destroy();
-            progressBox.destroy();
+            // progressBar.destroy();
+            // progressBox.destroy();
             loadingText.destroy();
             percentText.destroy();
             assetText.destroy();
@@ -130,6 +132,18 @@ export class PreloaderScene extends Phaser.Scene {
         for (const resource of resources.audio) {
             this.load.audio(resource.key, resource.url);
         }
+
+        WebFontLoader.call(this.load, {
+            google: {
+                families: ["Noto Sans JP"],
+            },
+        });
+        this.load.on("webfontactive", function (fileObj: any, familyName: string) {
+            console.log("font-active: " + familyName);
+        });
+        this.load.on("webfontinactive", function (fileObj: any, familyName: string) {
+            console.log("font-inactive: " + familyName);
+        });
     }
 
     create() {
