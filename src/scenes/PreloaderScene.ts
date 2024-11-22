@@ -21,7 +21,7 @@ export class PreloaderScene extends Phaser.Scene {
             y: height / 2 - 50,
             text: "Loading...",
             style: {
-                font: "20px monospace",
+                font: "20px 'Noto Sans JP'",
                 color: "#ffffff",
             },
         });
@@ -32,7 +32,7 @@ export class PreloaderScene extends Phaser.Scene {
             y: height / 2 - 5,
             text: "0%",
             style: {
-                font: "18px monospace",
+                font: "18px 'Noto Sans JP'",
                 color: "#ffffff",
             },
         });
@@ -43,14 +43,13 @@ export class PreloaderScene extends Phaser.Scene {
             y: height / 2 + 50,
             text: "",
             style: {
-                font: "18px monospace",
+                font: "18px 'Noto Sans JP'",
                 color: "#ffffff",
             },
         });
         assetText.setOrigin(0.5, 0.5);
 
         this.load.on("progress", function (value: number) {
-            console.log(value);
             percentText.setText(value * 100 + "%");
             // progressBar.clear();
             // progressBar.fillStyle(0xffffff, 1);
@@ -59,7 +58,6 @@ export class PreloaderScene extends Phaser.Scene {
 
         this.load.on("fileprogress", function (file: Phaser.Loader.File) {
             assetText.setText("Loading asset: " + file.key);
-            console.log(file.key);
         });
         this.load.on("complete", function () {
             // progressBar.destroy();
@@ -142,7 +140,7 @@ export class PreloaderScene extends Phaser.Scene {
             audio: [
                 {
                     key: "街の環境音.ubn_intersection2",
-                    url: "sound/ubn_intersection2.mp3",
+                    url: "bgm/ubn_intersection2.mp3",
                 },
                 {
                     key: "フリー環境音素材.メール・メッセージ受信音",

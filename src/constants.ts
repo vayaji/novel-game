@@ -6,3 +6,4 @@ export const TIMELINE_ID = "tid";
 export const TIMELINE_INDEX = "ti";
 export const BACKGROUND_KEY = "bk";
 export const LOCATION_NAME = "ln";
+export const BGM_KEY = "b";

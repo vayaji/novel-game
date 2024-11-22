@@ -104,10 +104,12 @@ export class TimelinePlayer {
         localStorage.setItem("timelineIndex", this.timelineIndex.toString());
         localStorage.setItem("backgroundKey", this.backgroundKey || "");
         localStorage.setItem("locationName", this.locationName || "");
+        localStorage.setItem("bgmKey", this.bgmKey || "");
 
         const timelineEvent = this.timeline[this.timelineIndex++];
         switch (timelineEvent.type) {
             case "playSound":
+                this.bgmKey = timelineEvent.key;
                 console.log(timelineEvent);
                 if (timelineEvent.loop) {
                     console.log(0, this.bgm);
@@ -263,5 +265,9 @@ export class TimelinePlayer {
 
     getLocationName() {
         return this.locationName;
+    }
+
+    getBgmKey() {
+        return this.bgmKey;
     }
 }
