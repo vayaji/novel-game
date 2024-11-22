@@ -44,10 +44,11 @@ export class TimelinePlayer {
             }
         });
         this.scene.input.keyboard!.on("keydown", (event: KeyboardEvent) => {
+            // console.log(event.key);
             if (!this.canNext) {
                 return;
             }
-            if (event.key !== "Enter" && event.key !== " ") {
+            if (event.key !== "Enter" && event.key !== " " && event.key !== "ArrowRight") {
                 return;
             }
             if (this.dialogBox.isAnimating()) {
@@ -110,11 +111,11 @@ export class TimelinePlayer {
         switch (timelineEvent.type) {
             case "playSound":
                 this.bgmKey = timelineEvent.key;
-                console.log(timelineEvent);
+                // console.log(timelineEvent);
                 if (timelineEvent.loop) {
-                    console.log(0, this.bgm);
+                    // console.log(0, this.bgm);
                     if (this.bgm) {
-                        console.log(1);
+                        // console.log(1);
                         this.scene.tweens.add({
                             targets: this.bgm,
                             volume: 0,
@@ -146,7 +147,7 @@ export class TimelinePlayer {
                     if (timelineEvent.image == "None") {
                         this.dialogBox.setCharacterImage("");
                     } else {
-                        console.log(`${timelineEvent.speakerName}-${timelineEvent.image}`);
+                        // console.log(`${timelineEvent.speakerName}-${timelineEvent.image}`);
                         this.dialogBox.setCharacterImage(`${timelineEvent.speakerName}-${timelineEvent.image}`);
                     }
                 }
@@ -155,6 +156,7 @@ export class TimelinePlayer {
                 this.changegTimeline(timelineEvent.timelineID, timelineEvent.fadeTime);
                 break;
             case "sceneTransition":
+                this.bgm.destroy();
                 if (timelineEvent.fadeTime) {
                     this.scene.cameras.main.fadeOut(timelineEvent.fadeTime / 2, 0, 0, 0);
                     this.scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
@@ -225,7 +227,7 @@ export class TimelinePlayer {
             timelineID: timelineID,
             ...(this.backgroundKey && { backgroundKey: this.backgroundKey }),
             ...(this.locationName && { locationName: this.locationName }),
-            ...(this.bgmKey && { bgmKey: this.bgmKey }),
+            // ...(this.bgmKey && { bgmKey: this.bgmKey }),
         };
         // console.log(backgroundKey, locationName);
         localStorage.setItem("timeline", timelineID);

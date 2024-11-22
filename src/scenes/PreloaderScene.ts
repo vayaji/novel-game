@@ -20,7 +20,7 @@ export class PreloaderScene extends Phaser.Scene {
             y: height / 2 - 50,
             text: "Loading...",
             style: {
-                font: "20px 'Noto Sans JP'",
+                font: "20px 'Avenir-Next-Condensed-UltraLightItalic'",
                 color: "#69A8D3",
             },
         });
@@ -31,7 +31,7 @@ export class PreloaderScene extends Phaser.Scene {
             y: height / 2 - 5,
             text: "0%",
             style: {
-                font: "18px 'Noto Sans JP'",
+                font: "18px 'Avenir-Next-Condensed-UltraLightItalic'",
                 color: "#69A8D3",
             },
         });
@@ -42,7 +42,7 @@ export class PreloaderScene extends Phaser.Scene {
         //     y: height / 2 + 50,
         //     text: "",
         //     style: {
-        //         font: "18px 'Noto Sans JP'",
+        //         font: "18px 'Avenir-Next-Condensed-UltraLightItalic'",
         //         color: "#69A8D3",
         //     },
         // });
@@ -72,6 +72,10 @@ export class PreloaderScene extends Phaser.Scene {
                 {
                     key: "title",
                     url: "title.png",
+                },
+                {
+                    key: "next-step",
+                    url: "next-step.png",
                 },
                 /* 背景 */
                 {
@@ -185,7 +189,7 @@ export class PreloaderScene extends Phaser.Scene {
 
         WebFontLoader.call(this.load, {
             google: {
-                families: ["Noto Sans JP"],
+                families: ["Avenir-Next-Condensed-UltraLightItalic"],
             },
         });
     }

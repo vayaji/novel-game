@@ -330,5 +330,18 @@ export const timelineData: Timelines = {
             image: "",
             text: "過去の記憶を遡りながら、霞ヶ丘の静かな風景を見つめた。夏音が消えた理由、そして手紙に込められた謎。それを解き明かすために、遥斗は再びこの町で過去と向き合うことを決意するのだった。",
         },
+        {
+            type: "sceneTransition",
+            name: "nextStep",
+            data: { nextTimelineID: "chapter-2", text: "Chapter1 故郷" },
+        },
+    ],
+    "chapter-2": [
+        // {
+        //     type: "dialog",
+        //     speakerName: "ナレーション",
+        //     image: "",
+        //     text: "aiueoeueifuhsidhfisdjk",
+        // },
     ],
 };
