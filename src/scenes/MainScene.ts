@@ -97,7 +97,7 @@ export class MainScene extends Phaser.Scene {
         qrCode.append(qrElement);
 
         exportIcon.on("pointerdown", () => {
-            let url = `${window.location.href}?${TIMELINE_ID}=${timelinePlayer.getTimelineID()}&${TIMELINE_INDEX}=${timelinePlayer.getTimelineIndex() - 1}&${BACKGROUND_KEY}=${timelinePlayer.getBackgroundKey()}&${LOCATION_NAME}=${timelinePlayer.getLocationName()}`;
+            let url = `${window.location.href}?${TIMELINE_ID}=${timelinePlayer.getTimelineID()}&${TIMELINE_INDEX}=${timelinePlayer.getTimelineIndex() - 1}&${BACKGROUND_KEY}=${timelinePlayer.getBackgroundKey()}&${LOCATION_NAME}=${timelinePlayer.getLocationName()}&${BGM_KEY}=${timelinePlayer.getBgmKey()}`;
             url = encodeURI(url);
             qrCode.update({ data: url });
             exportIcon.setInteractive(false);
@@ -120,6 +120,7 @@ export class MainScene extends Phaser.Scene {
             localStorage.removeItem("timelineIndex");
             localStorage.removeItem("backgroundKey");
             localStorage.removeItem("locationName");
+            localStorage.removeItem("bgmKey");
             // this.scene.start("title");
         });
         this.add.existing(resetButton);
