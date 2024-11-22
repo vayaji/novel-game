@@ -1,6 +1,7 @@
 export type DialogBoxConfig = {
     canvasWidth: number;
     canvasHeight: number;
+    padding?: number;
     textStyle?: Phaser.Types.GameObjects.Text.TextStyle;
 };
 
@@ -28,11 +29,12 @@ export class DialogBox extends Phaser.GameObjects.Container {
     private backgroundImage: Phaser.GameObjects.Image;
     private backgroundTexture?: string;
 
-    constructor(scene: Phaser.Scene, { canvasWidth, canvasHeight, textStyle = { fontSize: "32px", fontFamily: "Noto Sans  JP", color: "#707070" } }: DialogBoxConfig) {
+    constructor(scene: Phaser.Scene, { canvasWidth, canvasHeight, padding = 50, textStyle = { fontSize: "32px", fontFamily: "Noto Sans  JP", color: "#707070" } }: DialogBoxConfig) {
         super(scene, 0, 0);
 
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
+        this.padding = padding;
         this.textStyle = textStyle;
 
         this.backgroundImage = this.scene.add.image(0, 0, "").setOrigin(0, 0.2).setScale(1.0);
@@ -45,7 +47,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
         this.setSize(width, height);
         // console.log(width, height);
 
-        this.locationTextObject = new Phaser.GameObjects.Text(this.scene, 175, this.padding + 70 / 2, "", this.textStyle).setOrigin(0.5, 0.5);
+        this.locationTextObject = new Phaser.GameObjects.Text(this.scene, this.padding * 3, this.padding + 70 / 2, "", this.textStyle).setOrigin(0, 0);
         this.add(this.locationTextObject);
 
         this.textBoxObject = new Phaser.GameObjects.Rectangle(this.scene, 0, y, width, height, 0xffffff).setOrigin(0, 0);
@@ -61,7 +63,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
         this.speakerTextObject = new Phaser.GameObjects.Text(this.scene, this.padding * 2, y + this.padding, "", this.textStyle).setOrigin(0, 0);
         this.add(this.speakerTextObject);
 
-        this.characterImage = this.scene.add.image(this.canvasWidth, 0, "").setOrigin(0, 0).setScale(3.0);
+        this.characterImage = this.scene.add.image(this.canvasWidth, this.canvasHeight + 100, "").setOrigin(0, 1);
         this.characterImage.setVisible(false);
         this.characterImage.setDepth(10);
         this.add(this.characterImage);
@@ -80,7 +82,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
         this.textBoxObject.setPosition(0, y);
         this.textObject.setPosition(this.padding * 3, y + this.padding + 70);
         this.speakerTextObject.setPosition(this.padding * 2, y + this.padding);
-        this.characterImage.setPosition(this.canvasWidth, 0);
+        this.characterImage.setPosition(this.canvasWidth, this.canvasHeight);
     }
 
     getTextStyle(): Phaser.Types.GameObjects.Text.TextStyle {
@@ -111,11 +113,15 @@ export class DialogBox extends Phaser.GameObjects.Container {
         if (this.characterTexture === imageKey) {
             return;
         }
+        if (imageKey === "") {
+            this.characterImage.setVisible(false);
+            return;
+        }
         this.characterImage.setTexture(imageKey);
         this.characterImage.setVisible(true);
         this.scene.tweens.add({
             targets: this.characterImage,
-            x: this.canvasWidth - 1200,
+            x: this.canvasWidth - 800,
             duration: 500,
             ease: Phaser.Math.Easing.Sine.InOut,
         });
@@ -152,5 +158,9 @@ export class DialogBox extends Phaser.GameObjects.Container {
 
     setSpeakerName(speakerName: string) {
         this.speakerTextObject.setText(speakerName);
+    }
+
+    getPadding() {
+        return this.padding;
     }
 }

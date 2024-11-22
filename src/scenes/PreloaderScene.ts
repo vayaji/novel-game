@@ -50,6 +50,7 @@ export class PreloaderScene extends Phaser.Scene {
         assetText.setOrigin(0.5, 0.5);
 
         this.load.on("progress", function (value: number) {
+            console.log(value);
             percentText.setText(value * 100 + "%");
             // progressBar.clear();
             // progressBar.fillStyle(0xffffff, 1);
@@ -58,6 +59,7 @@ export class PreloaderScene extends Phaser.Scene {
 
         this.load.on("fileprogress", function (file: Phaser.Loader.File) {
             assetText.setText("Loading asset: " + file.key);
+            console.log(file.key);
         });
         this.load.on("complete", function () {
             // progressBar.destroy();
@@ -69,10 +71,12 @@ export class PreloaderScene extends Phaser.Scene {
 
         const resources = {
             image: [
+                /* タイトル */
                 {
                     key: "title",
                     url: "title.png",
                 },
+                /* 背景 */
                 {
                     key: "忙しい街の風景",
                     url: "background/忙しい街の風景.png",
@@ -99,7 +103,32 @@ export class PreloaderScene extends Phaser.Scene {
                 },
                 {
                     key: "手紙",
-                    url: "background/envelope-7348722_1920.jpg",
+                    url: "background/手紙背景.png",
+                },
+                {
+                    key: "black",
+                    url: "background/black.jpg",
+                },
+                /* キャラクター */
+                {
+                    key: "遥斗-疲れる",
+                    url: "character/haruto/疲れる顔.png",
+                },
+                {
+                    key: "遥斗-懐かしい",
+                    url: "character/haruto/普通.png",
+                },
+                {
+                    key: "遥斗-普通",
+                    url: "character/haruto/普通.png",
+                },
+                {
+                    key: "遥斗-疑問",
+                    url: "character/haruto/疑問の顔、目あけ、口あけて.png",
+                },
+                {
+                    key: "遥斗-驚き",
+                    url: "character/haruto/疑問の顔、目あけ、口あけて.png",
                 },
             ],
             svg: [

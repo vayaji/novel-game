@@ -52,13 +52,16 @@ export class MainScene extends Phaser.Scene {
         // this.sound.play("bgm");
         const { width, height } = this.game.canvas;
         let fontSize: string = "32px";
+        let padding: number = 50;
         if (window.innerWidth < 1000) {
-            fontSize = "48px";
+            fontSize = "36px";
+            padding = 20;
         } else if (window.innerWidth < 1200) {
-            fontSize = "42px";
+            fontSize = "34px";
+            padding = 30;
         }
         // console.log(fontSize, width < 1000, width);
-        const dialogBoxConfig: DialogBoxConfig = { canvasWidth: width, canvasHeight: height, textStyle: { fontSize, fontFamily: "Noto Sans  JP", color: "#707070" } };
+        const dialogBoxConfig: DialogBoxConfig = { canvasWidth: width, canvasHeight: height, padding, textStyle: { fontSize, fontFamily: "Noto Sans  JP", color: "#707070" } };
         const dialogBox = new DialogBox(this, dialogBoxConfig);
         const timelinePlayer = new TimelinePlayer(this, dialogBox, width, height);
         timelinePlayer.start(this.timelineID, this.timelineIndex, this.backgroundKey, this.locationName);

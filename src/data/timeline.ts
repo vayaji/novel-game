@@ -8,12 +8,12 @@ export const timelineData: Timelines = {
             loop: true,
         },
         {
-            type: "setBackground",
-            key: "忙しい街の風景",
-        },
-        {
             type: "setLocation",
             name: "街",
+        },
+        {
+            type: "setBackground",
+            key: "忙しい街の風景",
         },
         {
             type: "dialog",
@@ -45,12 +45,12 @@ export const timelineData: Timelines = {
             loop: false,
         },
         {
-            type: "setBackground",
-            key: "オフィス",
-        },
-        {
             type: "setLocation",
             name: "オフィス",
+        },
+        {
+            type: "setBackground",
+            key: "オフィス",
         },
         {
             type: "dialog",
@@ -64,12 +64,12 @@ export const timelineData: Timelines = {
             loop: true,
         },
         {
-            type: "setBackground",
-            key: "スマートフォン",
-        },
-        {
             type: "setLocation",
             name: "スマートフォン",
+        },
+        {
+            type: "setBackground",
+            key: "スマートフォン",
         },
         {
             type: "dialog",
@@ -126,12 +126,19 @@ export const timelineData: Timelines = {
             text: "遥斗は驚きと悲しみの感情に押しつぶされ、祖父との時間を悔やみ、後悔と虚しさに包まれてしまった。",
         },
         {
-            type: "setBackground",
-            key: "fade:1000",
+            type: "timelineTransition",
+            timelineID: "chapter1-1",
+            fadeTime: 1000,
         },
+    ],
+    "chapter1-1": [
         {
             type: "setLocation",
-            name: "black",
+            name: "",
+        },
+        {
+            type: "setBackground",
+            key: "black",
         },
         {
             type: "dialog",
@@ -145,12 +152,12 @@ export const timelineData: Timelines = {
             loop: true,
         },
         {
-            type: "setBackground",
-            key: "田舎の風景",
-        },
-        {
             type: "setLocation",
             name: "霞ヶ丘",
+        },
+        {
+            type: "setBackground",
+            key: "田舎の風景",
         },
         {
             type: "dialog",
@@ -194,12 +201,12 @@ export const timelineData: Timelines = {
             loop: true,
         },
         {
-            type: "setBackground",
-            key: "祖父の家",
-        },
-        {
             type: "setLocation",
             name: "祖父の家",
+        },
+        {
+            type: "setBackground",
+            key: "祖父の家",
         },
         {
             type: "dialog",
@@ -256,17 +263,12 @@ export const timelineData: Timelines = {
             text: "この机で、じいちゃんはいつも何を書いていたんだろうな……",
         },
         {
-            type: "playSound",
-            key: "フリーbgm.ひらひらり",
-            loop: true,
+            type: "setLocation",
+            name: "机と引き出し(悩み)",
         },
         {
             type: "setBackground",
             key: "机と引き出し",
-        },
-        {
-            type: "setLocation",
-            name: "机と引き出し(悩み)",
         },
         {
             type: "dialog",
@@ -297,12 +299,12 @@ export const timelineData: Timelines = {
             loop: false,
         },
         {
-            type: "setBackground",
-            key: "",
+            type: "setLocation",
+            name: "夏音からの手紙",
         },
         {
-            type: "setLocation",
-            name: "手紙",
+            type: "setBackground",
+            key: "手紙",
         },
         {
             type: "dialog",
@@ -328,15 +330,5 @@ export const timelineData: Timelines = {
             image: "",
             text: "過去の記憶を遡りながら、霞ヶ丘の静かな風景を見つめた。夏音が消えた理由、そして手紙に込められた謎。それを解き明かすために、遥斗は再びこの町で過去と向き合うことを決意するのだった。",
         },
-        {
-            type: "choice",
-            choices: [
-                {
-                    text: "もう一回",
-                    timelineID: "chapter1",
-                },
-            ],
-        },
     ],
-    chapter2: [],
 };
