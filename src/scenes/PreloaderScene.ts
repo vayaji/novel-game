@@ -4,7 +4,7 @@ export class PreloaderScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.setPath("src/assets/");
+        this.load.setPath("assets/");
         // this.add.text(100, 100, "preloader");
         // this.add.sprite(0, 0, "background").setOrigin(0, 0);
         const progressBar = this.add.graphics();
