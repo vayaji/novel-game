@@ -14,7 +14,7 @@ export class TimelinePlayer {
     private backgroundKey?: string;
     private locationName?: string;
     private canNext: boolean = true;
-    private bgm: Phaser.Sound.BaseSound;
+    private bgm: Phaser.Sound.WebAudioSound;
     private bgmKey?: string;
 
     constructor(private scene: Phaser.Scene, private dialogBox: DialogBox, private canvasWidth: number, private canvasHeight: number) {
@@ -103,20 +103,28 @@ export class TimelinePlayer {
         const timelineEvent = this.timeline[this.timelineIndex++];
         switch (timelineEvent.type) {
             case "playSound":
+                console.log(timelineEvent);
                 this.bgmKey = timelineEvent.key;
-                // console.log(timelineEvent);
                 if (timelineEvent.loop) {
-                    // console.log(0, this.bgm);
                     if (this.bgm) {
-                        // console.log(1);
                         this.scene.tweens.add({
                             targets: this.bgm,
                             volume: 0,
-                            duration: 500,
+                            duration: 2000,
                         });
                     }
-                    this.bgm = this.scene.game.sound.add(timelineEvent.key, { loop: timelineEvent.loop });
-                    this.bgm.play();
+                    console.log(this.bgm);
+                    this.bgm = this.scene.sound.add(timelineEvent.key, { loop: timelineEvent.loop }) as Phaser.Sound.WebAudioSound;
+                    console.log(this.bgm);
+                    this.scene.time.delayedCall(2200, () => {
+                        this.bgm.play();
+                    });
+                    this.bgm.setVolume(0);
+                    this.scene.tweens.add({
+                        targets: this.bgm,
+                        volume: 1,
+                        duration: 2000,
+                    });
                 } else {
                     if (next) this.scene.game.sound.play(timelineEvent.key);
                 }
@@ -149,14 +157,22 @@ export class TimelinePlayer {
                 this.changegTimeline(timelineEvent.timelineID, timelineEvent.fadeTime);
                 break;
             case "sceneTransition":
-                this.bgm.destroy();
                 if (timelineEvent.fadeTime) {
-                    this.scene.cameras.main.fadeOut(timelineEvent.fadeTime / 2, 0, 0, 0);
-                    this.scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-                        this.scene.scene.start(timelineEvent.name, {
-                            ...timelineEvent.data,
-                            fadeTime: timelineEvent.fadeTime! / 2,
+                    this.scene.time.delayedCall(2200 - timelineEvent.fadeTime / 2, () => {
+                        this.scene.cameras.main.fadeOut(timelineEvent.fadeTime! / 2, 0, 0, 0);
+                        this.scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+                            this.scene.scene.start(timelineEvent.name, {
+                                ...timelineEvent.data,
+                                fadeTime: timelineEvent.fadeTime! / 2,
+                            });
+                            console.log("destory");
+                            this.bgm.destroy();
                         });
+                    });
+                    this.scene.tweens.add({
+                        targets: this.bgm,
+                        volume: 0,
+                        duration: 2000,
                     });
                 } else {
                     this.scene.scene.start(timelineEvent.name, timelineEvent.data);
@@ -218,19 +234,17 @@ export class TimelinePlayer {
     private changegTimeline(timelineID: string, fadeTime?: number) {
         const data = {
             timelineID: timelineID,
-            ...(this.backgroundKey && { backgroundKey: this.backgroundKey }),
-            ...(this.locationName && { locationName: this.locationName }),
-            // ...(this.bgmKey && { bgmKey: this.bgmKey }),
         };
-        // console.log(backgroundKey, locationName);
         localStorage.setItem("timeline", timelineID);
         localStorage.setItem("timelineIndex", "0");
         if (fadeTime) {
-            this.scene.cameras.main.fadeOut(fadeTime / 2, 0, 0, 0);
-            this.scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-                this.scene.scene.restart({
-                    ...data,
-                    fadeTime: fadeTime / 2,
+            this.scene.time.delayedCall(2200 - fadeTime / 2, () => {
+                this.scene.cameras.main.fadeOut(fadeTime / 2, 0, 0, 0);
+                this.scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+                    this.scene.scene.restart({
+                        ...data,
+                        fadeTime: fadeTime / 2,
+                    });
                 });
             });
         } else {
@@ -241,7 +255,7 @@ export class TimelinePlayer {
         this.scene.tweens.add({
             targets: this.bgm,
             volume: 0,
-            duration: 500,
+            duration: 2000,
         });
         // this.scene.game.sound.stopAll();
     }

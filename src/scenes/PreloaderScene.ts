@@ -165,9 +165,37 @@ export class PreloaderScene extends Phaser.Scene {
                     key: "フリーbgm.ゆりかご",
                     url: "bgm/ゆりかご.mp3",
                 },
+                // {
+                //     key: "コウノネ.siryou",
+                //     url: "sound/siryou.mp3",
+                // },
                 {
-                    key: "コウノネ.siryou",
-                    url: "sound/siryou.mp3",
+                    key: "フリー効果音素材.紙のページをめくる音",
+                    url: "sound/紙のページをめくる音.mp3",
+                },
+                {
+                    key: "フリーbgm素材.フォークロア",
+                    url: "bgm/フォークロア.mp3",
+                },
+                {
+                    key: "フリーbgm.The Window Overlooking All Things",
+                    url: "bgm/The_Window_Overlooking_All_Things.mp3",
+                },
+                {
+                    key: "フリーbgm.木漏れ日",
+                    url: "bgm/木漏れ日.mp3",
+                },
+                {
+                    key: "フリーbgm素材.ながれぼし",
+                    url: "bgm/ながれぼし.mp3",
+                },
+                {
+                    key: "効果音ラボ.土の上を歩く",
+                    url: "sound/土の上を歩く.mp3",
+                },
+                {
+                    key: "フリーbgm素材.ある冬の寒い夜に",
+                    url: "bgm/ある冬の寒い夜に.mp3",
                 },
             ],
         };
