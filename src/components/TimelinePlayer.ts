@@ -29,7 +29,7 @@ export class TimelinePlayer {
         graphics.fillPoints(polygon.points, true);
         this.dialogBox.addAt(graphics, 0);
 
-        this.hitArea = this.scene.add.zone(0, 0, canvasWidth, canvasHeight).setOrigin(0, 0);
+        this.hitArea = this.scene.add.zone(0, 10, canvasWidth, canvasHeight).setOrigin(0, 0);
         this.hitArea.setInteractive({
             useHandCursor: true,
         });

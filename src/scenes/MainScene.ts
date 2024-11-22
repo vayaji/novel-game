@@ -108,10 +108,15 @@ export class MainScene extends Phaser.Scene {
             });
         });
 
-        // const choiceBoxConfig: ChoiceBoxConfig = {
-        //     canvasWidth: width,
-        //     canvasHeight: height,
-        // };
-        // this.add.rectangle(0, 0, width, height).setOrigin(0, 0).setStrokeStyle(20, 0xff0000);
+        const resetButton = this.add.rectangle(0, 0, 16, 16, 0x000000).setAlpha(0.2).setOrigin(0, 0);
+        resetButton.setInteractive();
+        resetButton.on("pointerdown", () => {
+            localStorage.removeItem("timeline");
+            localStorage.removeItem("timelineIndex");
+            localStorage.removeItem("backgroundKey");
+            localStorage.removeItem("locationName");
+            // this.scene.start("title");
+        });
+        this.add.existing(resetButton);
     }
 }
