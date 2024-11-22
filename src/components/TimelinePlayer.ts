@@ -64,24 +64,20 @@ export class TimelinePlayer {
         // });
     }
 
-    start(timelineID: string, index: number = 0, backgroundKey?: string, locationName?: string, bgmKey?: string) {
-        // TODO: index直接指定しないでindex回next()する。
+    start(timelineID: string, index: number = 0) {
         this.timelineID = timelineID;
         this.timeline = timelineData[timelineID];
-        this.timelineIndex = index;
-        if (backgroundKey) {
-            this.dialogBox.setBackgroundImage(backgroundKey);
-            this.backgroundKey = backgroundKey;
+
+        for (let i = 0; i < index; i++) {
+            this.next(false);
         }
-        if (locationName) {
-            this.dialogBox.setLocation(locationName);
-            this.locationName = locationName;
-        }
-        if (bgmKey) {
-            this.bgmKey = bgmKey;
-            this.bgm = this.scene.game.sound.add(bgmKey);
-            this.bgm.play();
-        }
+
+        // if (bgmKey) {
+        //     this.bgmKey = bgmKey;
+        //     this.bgm = this.scene.game.sound.add(bgmKey);
+        //     this.bgm.play();
+        // }
+
         this.next();
     }
 
@@ -96,17 +92,14 @@ export class TimelinePlayer {
         this.canNext = canNext;
     }
 
-    private next() {
+    private next(next: boolean = true) {
         if (!this.timeline || this.timelineIndex >= this.timeline.length) {
             return;
         }
 
         localStorage.setItem("timeline", this.timelineID);
         localStorage.setItem("timelineIndex", this.timelineIndex.toString());
-        localStorage.setItem("backgroundKey", this.backgroundKey || "");
-        localStorage.setItem("locationName", this.locationName || "");
-        localStorage.setItem("bgmKey", this.bgmKey || "");
-
+        window.history.pushState("", "", "/");
         const timelineEvent = this.timeline[this.timelineIndex++];
         switch (timelineEvent.type) {
             case "playSound":
@@ -125,19 +118,19 @@ export class TimelinePlayer {
                     this.bgm = this.scene.game.sound.add(timelineEvent.key, { loop: timelineEvent.loop });
                     this.bgm.play();
                 } else {
-                    this.scene.game.sound.play(timelineEvent.key);
+                    if (next) this.scene.game.sound.play(timelineEvent.key);
                 }
-                this.next();
+                if (next) this.next();
                 break;
             case "setBackground":
                 this.dialogBox.setBackgroundImage(timelineEvent.key);
                 this.backgroundKey = timelineEvent.key;
-                this.next();
+                if (next) this.next();
                 break;
             case "setLocation":
                 this.dialogBox.setLocation(timelineEvent.name);
                 this.locationName = timelineEvent.name;
-                this.next();
+                if (next) this.next();
                 break;
             case "dialog":
                 const wrappedLine = Util.autoWrap(timelineEvent.text, this.canvasWidth - this.dialogBox.getPadding() * 3 - 600, this.scene, this.dialogBox.getTextStyle());
