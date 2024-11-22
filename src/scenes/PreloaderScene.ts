@@ -91,6 +91,10 @@ export class PreloaderScene extends Phaser.Scene {
                     key: "haruto-normal",
                     url: "character/haruto/normal.png",
                 },
+                {
+                    key: "title",
+                    url: "title.png",
+                },
             ],
             svg: [
                 {
@@ -98,6 +102,16 @@ export class PreloaderScene extends Phaser.Scene {
                     url: "qr.svg",
                     width: 128,
                     height: 128,
+                },
+            ],
+            audio: [
+                {
+                    key: "bgm",
+                    url: "Morning.mp3",
+                },
+                {
+                    key: "door",
+                    url: "door.mp3",
                 },
             ],
         };
@@ -111,6 +125,10 @@ export class PreloaderScene extends Phaser.Scene {
                 width: resource.width,
                 height: resource.height,
             });
+        }
+
+        for (const resource of resources.audio) {
+            this.load.audio(resource.key, resource.url);
         }
     }
 

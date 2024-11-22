@@ -45,6 +45,7 @@ export class MainScene extends Phaser.Scene {
         if (!this.timelineID) {
             return;
         }
+        // this.sound.play("bgm");
         const { width, height } = this.game.canvas;
         let fontSize: string = "32px";
         if (window.innerWidth < 1000) {
