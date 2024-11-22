@@ -10,7 +10,7 @@ export class EndingScene extends Phaser.Scene {
         if (data.fadeTime) {
             this.cameras.main.fadeIn(data.fadeTime, 0, 0, 0);
         }
-        console.log(this.text);
+        // console.log(this.text);
     }
 
     create() {

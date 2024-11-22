@@ -16,7 +16,7 @@ export class TimelinePlayer {
     private canNext: boolean = true;
 
     constructor(private scene: Phaser.Scene, private dialogBox: DialogBox, private canvasWidth: number, private canvasHeight: number) {
-        console.log(this.timelineIndex);
+        // console.log(this.timelineIndex);
         // this.timelineIndex = 0;
         scene.add.existing(dialogBox);
         this.uiLayer = this.scene.add.container(0, 0);
@@ -84,7 +84,7 @@ export class TimelinePlayer {
     }
 
     setCanNext(canNext: boolean) {
-        console.log(canNext);
+        // console.log(canNext);
         this.canNext = canNext;
     }
 
@@ -99,8 +99,11 @@ export class TimelinePlayer {
         localStorage.setItem("locationName", this.locationName || "");
 
         const timelineEvent = this.timeline[this.timelineIndex++];
-
         switch (timelineEvent.type) {
+            case "playSound":
+                this.scene.sound.play(timelineEvent.key, { loop: timelineEvent.loop });
+                this.next();
+                break;
             case "setBackground":
                 this.dialogBox.setBackgroundImage(timelineEvent.key);
                 this.backgroundKey = timelineEvent.key;
@@ -123,7 +126,6 @@ export class TimelinePlayer {
                 this.changegTimeline(timelineEvent.timelineID, timelineEvent.fadeTime, this.backgroundKey, this.locationName);
                 break;
             case "sceneTransition":
-                console.log(timelineEvent.data);
                 if (timelineEvent.fadeTime) {
                     this.scene.cameras.main.fadeOut(timelineEvent.fadeTime / 2, 0, 0, 0);
                     this.scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
@@ -139,10 +141,8 @@ export class TimelinePlayer {
             case "choice":
                 this.setChoiceButtons(timelineEvent.choices);
                 break;
-            case "playSound":
-                // this.scene.sound.play(timelineEvent.key);
-                this.next();
-                break;
+            default:
+                console.error("unknown timeline event type: " + timelineEvent);
         }
     }
     private setChoiceButtons(choices: Choice[]) {
@@ -197,7 +197,7 @@ export class TimelinePlayer {
             ...(backgroundKey && { backgroundKey: backgroundKey }),
             ...(locationName && { locationName: locationName }),
         };
-        console.log(backgroundKey, locationName);
+        // console.log(backgroundKey, locationName);
         localStorage.setItem("timeline", timelineID);
         localStorage.setItem("timelineIndex", "0");
         if (fadeTime) {

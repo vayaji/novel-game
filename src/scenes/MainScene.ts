@@ -20,7 +20,7 @@ export class MainScene extends Phaser.Scene {
 
     init(data: any) {
         const params = new URLSearchParams(window.location.search);
-        console.log(params.get(TIMELINE_ID), params.get(TIMELINE_INDEX));
+        // console.log(params.get(TIMELINE_ID), params.get(TIMELINE_INDEX));
         this.timelineID = params.get(TIMELINE_ID) || data.timelineID || localStorage.getItem("timeline") || "chapter1";
         this.timelineIndex = parseInt(params.get(TIMELINE_INDEX)!) || parseInt(localStorage.getItem("timelineIndex")!) || 0;
         if (!(this.timelineID in timelineData)) {
@@ -92,7 +92,6 @@ export class MainScene extends Phaser.Scene {
             let url = `${window.location.href}?${TIMELINE_ID}=${timelinePlayer.getTimelineID()}&${TIMELINE_INDEX}=${timelinePlayer.getTimelineIndex() - 1}&${BACKGROUND_KEY}=${timelinePlayer.getBackgroundKey()}&${LOCATION_NAME}=${timelinePlayer.getLocationName()}`;
             url = encodeURI(url);
             qrCode.update({ data: url });
-            console.log(timelinePlayer.getBackgroundKey(), timelinePlayer.getLocationName(), url);
             exportIcon.setInteractive(false);
             timelinePlayer.setCanNext(false);
             const qrModalElement = document.getElementById("qr-modal-background")!;

@@ -70,32 +70,36 @@ export class PreloaderScene extends Phaser.Scene {
         const resources = {
             image: [
                 {
-                    key: "logo",
-                    url: "logo.png",
-                },
-                {
-                    key: "robot",
-                    url: "robot.png",
-                },
-                {
-                    key: "street",
-                    url: "street.png",
+                    key: "title",
+                    url: "title.png",
                 },
                 {
                     key: "忙しい街の風景",
-                    url: "background/busy.png",
+                    url: "background/忙しい街の風景.png",
                 },
                 {
-                    key: "home",
-                    url: "background/home.png",
+                    key: "オフィス",
+                    url: "background/会社のオフィス（日中）.jpg",
                 },
                 {
-                    key: "haruto-normal",
-                    url: "character/haruto/normal.png",
+                    key: "スマートフォン",
+                    url: "background/apple-1867461_1920.jpg",
                 },
                 {
-                    key: "title",
-                    url: "title.png",
+                    key: "田舎の風景",
+                    url: "background/田舎の駅前（日中）.jpg",
+                },
+                {
+                    key: "祖父の家",
+                    url: "background/和風の家の玄関ホール（照明ON）.jpg",
+                },
+                {
+                    key: "机と引き出し",
+                    url: "background/desk-3223810_1920.jpg",
+                },
+                {
+                    key: "手紙",
+                    url: "background/envelope-7348722_1920.jpg",
                 },
             ],
             svg: [
@@ -108,12 +112,32 @@ export class PreloaderScene extends Phaser.Scene {
             ],
             audio: [
                 {
-                    key: "bgm",
-                    url: "Morning.mp3",
+                    key: "街の環境音.ubn_intersection2",
+                    url: "sound/ubn_intersection2.mp3",
                 },
                 {
-                    key: "door",
-                    url: "door.mp3",
+                    key: "フリー環境音素材.メール・メッセージ受信音",
+                    url: "sound/メール・メッセージ受信音.mp3",
+                },
+                {
+                    key: "フリーbgm素材.もう終わりにしよう",
+                    url: "bgm/もう終わりにしよう.mp3",
+                },
+                {
+                    key: "フリーbgm素材.田舎の夏休み",
+                    url: "bgm/田舎の夏休み.mp3",
+                },
+                {
+                    key: "フリーbgm.ひらひらり",
+                    url: "bgm/ひらひらり.mp3",
+                },
+                {
+                    key: "フリーbgm.ゆりかご",
+                    url: "bgm/ゆりかご.mp3",
+                },
+                {
+                    key: "コウノネ.siryou",
+                    url: "sound/siryou.mp3",
                 },
             ],
         };
@@ -137,12 +161,6 @@ export class PreloaderScene extends Phaser.Scene {
             google: {
                 families: ["Noto Sans JP"],
             },
-        });
-        this.load.on("webfontactive", function (fileObj: any, familyName: string) {
-            console.log("font-active: " + familyName);
-        });
-        this.load.on("webfontinactive", function (fileObj: any, familyName: string) {
-            console.log("font-inactive: " + familyName);
         });
     }
 

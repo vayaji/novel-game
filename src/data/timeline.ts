@@ -293,7 +293,7 @@ export const timelineData: Timelines = {
         },
         {
             type: "playSound",
-            key: "コウノネ.資料をめくる",
+            key: "コウノネ.siryou",
             loop: false,
         },
         {

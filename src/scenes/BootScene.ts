@@ -3,9 +3,7 @@ export class BootScene extends Phaser.Scene {
         super("boot");
     }
 
-    preload() {
-        this.load.image("background", "src/assets/street.png");
-    }
+    preload() {}
 
     create() {
         this.add.text(100, 100, "boot");

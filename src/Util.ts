@@ -20,7 +20,7 @@ export class Util {
             tempLine += line;
         });
         wrappedLines.push(tempLine);
-        console.log(wrappedLines.join("\n"));
+        // console.log(wrappedLines.join("\n"));
         return wrappedLines.join("\n");
     }
 }
