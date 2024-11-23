@@ -103,7 +103,6 @@ export class TimelinePlayer {
         const timelineEvent = this.timeline[this.timelineIndex++];
         switch (timelineEvent.type) {
             case "playSound":
-                console.log(timelineEvent);
                 this.bgmKey = timelineEvent.key;
                 if (timelineEvent.loop) {
                     if (this.bgm) {
@@ -113,9 +112,7 @@ export class TimelinePlayer {
                             duration: 2000,
                         });
                     }
-                    console.log(this.bgm);
                     this.bgm = this.scene.sound.add(timelineEvent.key, { loop: timelineEvent.loop }) as Phaser.Sound.WebAudioSound;
-                    console.log(this.bgm);
                     this.scene.time.delayedCall(2200, () => {
                         this.bgm.play();
                     });
@@ -165,7 +162,7 @@ export class TimelinePlayer {
                                 ...timelineEvent.data,
                                 fadeTime: timelineEvent.fadeTime! / 2,
                             });
-                            console.log("destory");
+                            // console.log("destory");
                             this.bgm.destroy();
                         });
                     });

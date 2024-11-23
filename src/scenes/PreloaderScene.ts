@@ -110,6 +110,26 @@ export class PreloaderScene extends Phaser.Scene {
                     key: "black",
                     url: "background/black.jpg",
                 },
+                {
+                    key: "霞ヶ丘の古びた図書館",
+                    url: "background/26750062_l.jpg",
+                },
+                {
+                    key: "霞ヶ丘の廃れた建造物(外)",
+                    url: "background/31212425_l.jpg",
+                },
+                {
+                    key: "霞ヶ丘の廃れた建造物(内部)",
+                    url: "background/廃墟ビルの部屋（明）.jpg",
+                },
+                {
+                    key: "本",
+                    url: "background/本背景.png",
+                },
+                {
+                    key: "wip",
+                    url: "background/wip.png",
+                },
                 /* キャラクター */
                 {
                     key: "遥斗-疲れる",

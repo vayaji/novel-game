@@ -284,7 +284,7 @@ export const timelineData: Timelines = {
         },
         {
             type: "playSound",
-            key: "フリーbgm.ひらひらり",
+            key: "フリーbgm.ゆりかご",
             loop: true,
         },
         {
@@ -329,7 +329,7 @@ export const timelineData: Timelines = {
             name: "nextStep",
             data: {
                 nextTimelineID: "chapter2",
-                text: "Chapter1 故郷",
+                text: "Chapter1 帰郷",
             },
             fadeTime: 1000,
         },
@@ -390,11 +390,11 @@ export const timelineData: Timelines = {
         },
         {
             type: "setLocation",
-            name: "本",
+            name: "古びた本",
         },
         {
             type: "setBackground",
-            key: "",
+            key: "本",
         },
         {
             type: "dialog",
@@ -728,6 +728,12 @@ export const timelineData: Timelines = {
             speakerName: "ナレーション",
             image: "",
             text: "その一歩一歩が、遥斗にとっての決意の証となる。彼は迷うことなく、神社へ向けて足を進めた",
+        },
+        {
+            type: "sceneTransition",
+            name: "ending",
+            data: {},
+            fadeTime: 1000,
         },
     ],
 };

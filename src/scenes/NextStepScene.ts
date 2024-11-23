@@ -18,7 +18,7 @@ export class NextStepScene extends Phaser.Scene {
         if (!this.nextTimelineID) {
             return;
         }
-        localStorage.setItem("timelineID", this.nextTimelineID);
+        localStorage.setItem("timeline", this.nextTimelineID);
         localStorage.setItem("timelineIndex", "0");
         this.add.image(0, 0, "next-step").setOrigin(0, 0);
         this.add.text(1132, 1023, this.text!, { fontSize: "73px", fontFamily: "Avenir-Next-Condensed-UltraLightItalic", color: "#5295C3" }).setOrigin(0, 1);
