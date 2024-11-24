@@ -80,55 +80,55 @@ export class PreloaderScene extends Phaser.Scene {
                 /* 背景 */
                 {
                     key: "忙しい街の風景",
-                    url: "background/忙しい街の風景.png",
+                    url: "background/忙しい街の風景.webp",
                 },
                 {
                     key: "オフィス",
-                    url: "background/会社のオフィス（日中）.jpg",
+                    url: "background/会社のオフィス（日中）.webp",
                 },
                 {
                     key: "スマートフォン",
-                    url: "background/apple-1867461_1920.jpg",
+                    url: "background/apple-1867461_1920.webp",
                 },
                 {
                     key: "田舎の風景",
-                    url: "background/田舎の駅前（日中）.jpg",
+                    url: "background/田舎の駅前（日中）.webp",
                 },
                 {
                     key: "祖父の家",
-                    url: "background/和風の家の玄関ホール（照明ON）.jpg",
+                    url: "background/和風の家の玄関ホール（照明ON）.webp",
                 },
                 {
                     key: "机と引き出し",
-                    url: "background/desk-3223810_1920.jpg",
+                    url: "background/desk-3223810_1920.webp",
                 },
                 {
                     key: "手紙",
-                    url: "background/手紙背景.png",
+                    url: "background/手紙背景.webp",
                 },
                 {
                     key: "black",
-                    url: "background/black.jpg",
+                    url: "background/black.webp",
                 },
                 {
                     key: "霞ヶ丘の古びた図書館",
-                    url: "background/26750062_l.jpg",
+                    url: "background/26750062_l.webp",
                 },
                 {
                     key: "霞ヶ丘の廃れた建造物(外)",
-                    url: "background/31212425_l.jpg",
+                    url: "background/31212425_l.webp",
                 },
                 {
                     key: "霞ヶ丘の廃れた建造物(内部)",
-                    url: "background/廃墟ビルの部屋（明）.jpg",
+                    url: "background/廃墟ビルの部屋（明）.webp",
                 },
                 {
                     key: "本",
-                    url: "background/本背景.png",
+                    url: "background/本背景.webp",
                 },
                 {
                     key: "wip",
-                    url: "background/wip.png",
+                    url: "background/wip.webp",
                 },
                 /* キャラクター */
                 {
