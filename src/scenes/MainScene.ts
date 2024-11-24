@@ -5,7 +5,7 @@ import { TimelinePlayer } from "../components/TimelinePlayer";
 import { timelineData } from "../data/timeline";
 import { Timeline } from "../type/Timeline";
 import QRCodeStyling from "qr-code-styling";
-import { BACKGROUND_KEY, BGM_KEY, LOCATION_NAME, TIMELINE_ID, TIMELINE_INDEX } from "../constants";
+import { TIMELINE_ID, TIMELINE_INDEX } from "../constants";
 
 export class MainScene extends Phaser.Scene {
     private timelineID: string;
@@ -24,7 +24,7 @@ export class MainScene extends Phaser.Scene {
             console.error("invalid timelineID: " + this.timelineID);
         }
 
-        // console.log(data, this.timelineIndex);
+        // console.log(data, this.timelineIndex, this.timelineID);
         if (data.fadeTime) {
             this.cameras.main.fadeIn(data.fadeTime, 0, 0, 0);
         }
@@ -93,7 +93,8 @@ export class MainScene extends Phaser.Scene {
             });
         });
 
-        const resetButton = this.add.rectangle(0, 0, 16, 16, 0x000000).setAlpha(0.2).setOrigin(0, 0);
+        const resetButton = this.add.rectangle(width, height, 200, 100, 0x000000).setAlpha(0.2).setOrigin(1, 1);
+        this.add.text(width - 100, height - 50, "最初から", { fontSize, fontFamily: "Noto Sans  JP", color: "#ffffff" }).setOrigin(0.5, 0.5);
         resetButton.setInteractive();
         resetButton.on("pointerdown", () => {
             localStorage.removeItem("timeline");
