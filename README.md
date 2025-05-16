@@ -1,3 +1,28 @@
+# ノベルゲーム
+
+## アプリケーション概要
+
+文化祭の出し物でノベルゲームを作りました。
+
+## 使用技術
+
+言語: TypeScript
+
+フレームワーク: [Phaser.js](https://phaser.io/)
+
+## メンバー
+
+【コーディング】
+
+矢島悠大
+
+【 ストーリー、デザイン、イラスト 】
+
+メンバーの方々
+
+
+# Original
+
 # Phaser Vite TypeScript Template
 
 This is a Phaser 3 project template that uses Vite for bundling. It supports hot-reloading for quick development workflow, includes TypeScript support and scripts to generate production-ready builds.
