@@ -12,17 +12,6 @@ https://novel-game-ten.vercel.app にて公開しています。
 
 フレームワーク: [Phaser.js](https://phaser.io/)
 
-## メンバー
-
-【コーディング】
-
-矢島悠大
-
-【 ストーリー、デザイン、イラスト 】
-
-メンバーの方々
-
-
 # Original
 
 # Phaser Vite TypeScript Template
